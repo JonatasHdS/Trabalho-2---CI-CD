@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jonatas-frontcontainer-recommender
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jonatas-frontcontainer-recommender
+  template:
+    metadata:
+      labels:
+        app: jonatas-frontcontainer-recommender
+    spec:
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+           claimName: project2-pvc-jonatassantos
+      containers:
+      - name: jonatas-frontend-app
+        imagePullPolicy: Always
+        image: quay.io/jonatashds/frontend-container-recommender
+        volumeMounts:
+                - mountPath: "/shared"
+                  name: shared-storage
+        ports:
+        - containerPort: 32191
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jonatas-mlcontainer-recommender
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jonatas-mlcontainer-recommender
+  template:
+    metadata:
+      labels:
+        app: jonatas-mlcontainer-recommender
+    spec:
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+           claimName: project2-pvc-jonatassantos
+      containers:
+      - name: jonatas-ml-app
+        imagePullPolicy: Always 
+        image: quay.io/jonatashds/ml-container-recommender
+        volumeMounts:
+                - mountPath: "/shared"
+                  name: shared-storage
+        ports:
+        - containerPort: 32191
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: project2-pvc-jonatassantos
+spec:
+ accessModes:
+   - ReadWriteMany
+ storageClassName: standard
+ resources:
+   requests:
+     storage: 1Gi
+ volumeName: project2-pv-jonatassantos
+---
