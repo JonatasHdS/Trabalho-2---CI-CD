@@ -7,11 +7,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: jonatas-frontcontainer-recommender
+      app: jonatas-frontend-app
   template:
     metadata:
       labels:
-        app: jonatas-frontcontainer-recommender
+        app: jonatas-frontend-app
     spec:
       volumes:
         - name: shared-storage
@@ -26,6 +26,17 @@ spec:
                   name: shared-storage
         ports:
         - containerPort: 32191
+        env:
+        - name: dataset_path
+          valueFrom:
+            configMapKeyRef:
+              name: dataset-config
+              key: dataset_path
+        - name: image_tag
+          valueFrom:
+            configMapKeyRef:
+              name: image-tag-config
+              key: image_tag
 
 ---
 
@@ -37,11 +48,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: jonatas-mlcontainer-recommender
+      app: jonatas-ml-app
   template:
     metadata:
       labels:
-        app: jonatas-mlcontainer-recommender
+        app: jonatas-ml-app
     spec:
       volumes:
         - name: shared-storage
@@ -56,6 +67,12 @@ spec:
                   name: shared-storage
         ports:
         - containerPort: 32191
+        env: 
+        - name: dataset_path
+          valueFrom:
+            configMapKeyRef:
+              name: dataset-config
+              key: dataset_path
 ---
 
 apiVersion: v1

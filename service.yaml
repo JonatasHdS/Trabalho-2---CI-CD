@@ -4,8 +4,8 @@ metadata:
   name: jonatas-container-recommender-service
 spec:
   selector:
-    app: jonatas-container-recommender
+    app: jonatas-frontend-app
   ports:
     - protocol: TCP
-      port: 32191
+      port: 32191 
       targetPort: 32191
