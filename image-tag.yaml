@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 data:
   image_tag: v1.0.0
-  date: 11/23/2023
+  date: 11/23/2022
 metadata:
   name: image-tag-config
   namespace: jonatassantos
