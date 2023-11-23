@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: jonatas-frontcontainer-recommender
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: jonatas-frontend-app
@@ -45,7 +45,7 @@ kind: Deployment
 metadata:
   name: jonatas-mlcontainer-recommender
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: jonatas-ml-app
