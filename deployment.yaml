@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jonatas-frontcontainer1-recommender
+  name: jonatas-frontcontainer-recommender
 spec:
   replicas: 2
   selector:
@@ -20,7 +20,7 @@ spec:
       containers:
       - name: jonatas-frontend-app
         imagePullPolicy: Always
-        image: quay.io/jonatashds/frontend-container-recommender
+        image: quay.io/jonatashds/frontend-container-recommender:0.2
         volumeMounts:
                 - mountPath: "/shared"
                   name: shared-storage
@@ -48,7 +48,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jonatas-mlcontainer1-recommender
+  name: jonatas-mlcontainer-recommender
 spec:
   replicas: 2
   selector:
