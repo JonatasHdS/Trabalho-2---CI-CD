@@ -17,8 +17,8 @@ jobs:
         run: |
           COMMIT_VERSION=$(git rev-parse --short HEAD)
           CURRENT_DATE=$(date +"%d/%m/%Y %H:%M:%S")
-          sed -i "s/image_tag: .*/image_tag: $COMMIT_VERSION/" image-tag.yaml
-          sed -i "s/date: .*/date: $CURRENT_DATE/" image-tag.yaml
+          sed -i "s|image_tag: .*|image_tag: $COMMIT_VERSION|" image-tag.yaml
+          sed -i "s|date: .*|date: $CURRENT_DATE|" image-tag.yaml
           git add image-tag.yaml
           git commit -m "Update image_tag and date to $COMMIT_VERSION on $CURRENT_DATE"
           git push
