@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jonatas-frontcontainer-recommender
+  name: jonatas-frontcontainer1-recommender
 spec:
   replicas: 2
   selector:
@@ -48,7 +48,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jonatas-mlcontainer-recommender
+  name: jonatas-mlcontainer1-recommender
 spec:
   replicas: 2
   selector:
